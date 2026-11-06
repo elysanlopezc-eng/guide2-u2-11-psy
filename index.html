@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Montano - Research Questions, Hypotheses, and Variables</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montano: {
+                            blue: '#1269A8',
+                            yellow: '#F7D615',
+                            teal: '#54887D',
+                            lightBlue: '#88B5C7',
+                            olive: '#A6B046',
+                            softWhite: '#F2F5E9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'Segoe UI', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #E2E8F0;
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+        }
+
+        /* Digital Whiteboard Frame Styling */
+        .whiteboard-frame {
+            background-color: #F2F5E9;
+            border: 12px solid #334155;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(18, 105, 168, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn {
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn.active {
+            background-color: #1269A8;
+            color: #ffffff;
+            border-bottom: 4px solid #F7D615;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2F5E9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #88B5C7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1269A8;
+        }
+
+        .pulse-ring {
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(247, 214, 21, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(247, 214, 21, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(247, 214, 21, 0); }
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 min-h-screen">
+
+    <!-- Main Container / Digital Whiteboard Frame -->
+    <div id="whiteboard" class="whiteboard-frame max-w-7xl mx-auto p-4 sm:p-6 md:p-8 flex flex-col min-h-[90vh]">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between items-center border-b-4 border-montano-blue pb-4 mb-6 gap-4">
+            <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" 
+                     alt="Colegio Montano Logo" 
+                     class="h-14 sm:h-16 w-auto object-contain rounded-lg shadow-sm border border-gray-200 bg-white p-1"
+                     onerror="this.onerror=null; this.src='https://placehold.co/150x60/1269A8/ffffff?text=Montano';">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-montano-teal">High School - 4to Bachillerato (B2 Level) • Guide 2</span>
+                    <h1 class="text-xl sm:text-2xl font-extrabold text-montano-blue leading-tight">Research Questions, Hypotheses & Variables</h1>
+                    <p class="text-xs text-gray-600 font-semibold">Transforming General Topics into Operationalized Scientific Inquiry</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                <button onclick="toggleFullscreen()" title="Toggle Digital Whiteboard Fullscreen"
+                        class="flex items-center gap-2 bg-montano-blue hover:bg-montano-teal text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md transition-all active:scale-95">
+                    <i class="fa-solid fa-expand text-montano-yellow"></i>
+                    <span class="hidden sm:inline">Fullscreen Whiteboard</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Interactive Horizontal Navigation Tabs -->
+        <nav class="flex overflow-x-auto gap-2 pb-2 mb-6 border-b border-gray-300 scrollbar-thin">
+            <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-book-open text-montano-yellow"></i> 1. Theoretical Foundations & Lesson Agenda
+            </button>
+            <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-lightbulb text-montano-yellow"></i> 2. Solved Examples (15)
+            </button>
+            <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-sliders text-montano-yellow"></i> 3. Voice Simulator & Variable Lab
+            </button>
+            <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-wand-magic-sparkles text-montano-yellow"></i> 4. Refinement Workshop & Exit Ticket
+            </button>
+            <button onclick="switchTab('tab5')" id="btn-tab5" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-list-check text-montano-yellow"></i> 5. Formative Evaluation (15)
+            </button>
+        </nav>
+
+        <!-- TAB CONTENT CONTAINER -->
+        <main class="flex-grow">
+
+            <!-- TAB 1: Theoretical Foundations & Lesson Breakdown -->
+            <section id="tab1" class="tab-content block space-y-6">
+                <!-- Lesson Time Structure Banner -->
+                <div class="bg-white border-l-8 border-montano-yellow p-5 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="bg-montano-yellow text-montano-blue text-xs font-black px-3 py-1 rounded-full uppercase">1-Hour Class Structure</span>
+                        <h2 class="text-lg font-bold text-montano-blue">Instructional Blueprint: Operationalizing Inquiry</h2>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 mt-3">
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-lightBlue text-center">
+                            <span class="text-xs font-extrabold text-montano-blue block">5 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Retrieval Practice</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-teal text-center">
+                            <span class="text-xs font-extrabold text-montano-teal block">10 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Model Questions</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-olive text-center">
+                            <span class="text-xs font-extrabold text-montano-olive block">15 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Questions vs. Hypotheses</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-blue text-center">
+                            <span class="text-xs font-extrabold text-montano-blue block">15 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Identify Variables</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-teal text-center">
+                            <span class="text-xs font-extrabold text-montano-teal block">10 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Question Refinement</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-yellow text-center">
+                            <span class="text-xs font-extrabold text-montano-blue block">5 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Exit Ticket</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-Min Retrieval Practice Section -->
+                <div class="bg-white p-6 rounded-2xl border-2 border-montano-blue shadow-sm">
+                    <h3 class="text-lg font-extrabold text-montano-blue mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-montano-yellow"></i> 5-Minute Retrieval Practice (Guide 1 Review)
+                    </h3>
+                    <p class="text-xs text-gray-600 mb-4">Quick check before building hypotheses. Test your foundational recall:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-3 bg-montano-softWhite rounded-xl border border-gray-200">
+                            <span class="text-xs font-bold text-montano-blue block mb-1">1. Evidence vs. Opinion</span>
+                            <p class="text-xs text-gray-700">Why must psychological research avoid relying on anecdotal claims?</p>
+                        </div>
+                        <div class="p-3 bg-montano-softWhite rounded-xl border border-gray-200">
+                            <span class="text-xs font-bold text-montano-teal block mb-1">2. Direct Observation</span>
+                            <p class="text-xs text-gray-700">What makes a recorded measurement objective rather than subjective?</p>
+                        </div>
+                        <div class="p-3 bg-montano-softWhite rounded-xl border border-gray-200">
+                            <span class="text-xs font-bold text-montano-olive block mb-1">3. Systematic Control</span>
+                            <p class="text-xs text-gray-700">How do controlled methods protect researchers against confirmation bias?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Theory Concepts Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Research Questions vs Hypotheses -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-montano-blue shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-montano-blue mb-3">
+                                <i class="fa-solid fa-circle-question text-2xl"></i>
+                                <h3 class="text-lg font-bold">Research Question vs. Hypothesis</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <strong>Research Question:</strong> An open-ended, clear, focused inquiry regarding a relationship between phenomena.<br>
+                                <em>Example: "How does sleep duration affect exam performance?"</em><br><br>
+                                <strong>Hypothesis:</strong> A specific, testable prediction statement asserting expected direction and magnitude.<br>
+                                <em>Example: "Students who sleep 8 hours will score 15% higher than those sleeping 5 hours."</em>
+                            </p>
+                        </div>
+                        <div class="bg-montano-softWhite p-3 rounded-xl border border-montano-lightBlue">
+                            <span class="text-xs font-bold text-montano-teal block mb-1">Falsifiability Standard</span>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-montano-blue h-3 rounded-full w-[90%]"></div>
+                            </div>
+                            <span class="text-xs text-right block mt-1 font-semibold text-montano-blue">Must be empirically testable</span>
+                        </div>
+                    </div>
+
+                    <!-- The Three Variables -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-montano-teal shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-montano-teal mb-3">
+                                <i class="fa-solid fa-sliders text-2xl"></i>
+                                <h3 class="text-lg font-bold">The Experimental Variables</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <strong>Independent Variable (IV):</strong> The cause manipulated or categorized by the researcher.<br>
+                                <strong>Dependent Variable (DV):</strong> The measured effect or outcome.<br>
+                                <strong>Controlled Variables (CV):</strong> Extraneous factors kept strictly constant to ensure internal validity.
+                            </p>
+                        </div>
+                        <div class="bg-montano-softWhite p-3 rounded-xl border border-montano-olive">
+                            <span class="text-xs font-bold text-montano-olive block mb-1">Experimental Control Ratio</span>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-montano-teal h-3 rounded-full w-[85%]"></div>
+                            </div>
+                            <span class="text-xs text-right block mt-1 font-semibold text-montano-teal">High Internal Validity</span>
+                        </div>
+                    </div>
+
+                    <!-- Operational Definitions -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-montano-olive shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-montano-olive mb-3">
+                                <i class="fa-solid fa-ruler-combined text-2xl"></i>
+                                <h3 class="text-lg font-bold">Operational Definitions</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Psychological constructs like "anxiety", "smart", or "frustration" are abstract. An <strong>operational definition</strong> explicitly details exact measurement steps, units, or instruments so independent researchers can replicate the study with identical accuracy.
+                            </p>
+                        </div>
+                        <div class="bg-montano-softWhite p-3 rounded-xl border border-montano-yellow">
+                            <span class="text-xs font-bold text-montano-blue block mb-1">Replication Precision</span>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-montano-yellow h-3 rounded-full w-[95%]"></div>
+                            </div>
+                            <span class="text-xs text-right block mt-1 font-semibold text-montano-blue">Exact Protocol Alignment</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modeling Process: Broad to Focused -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-300 shadow-md">
+                    <h3 class="text-xl font-extrabold text-montano-blue mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-filter text-montano-yellow"></i> Modeling: Turning Broad Topics into Testable Designs
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="p-4 bg-red-50 border-t-4 border-red-500 rounded-xl">
+                            <span class="bg-red-500 text-white rounded-full px-2 py-0.5 text-[10px] font-bold">STAGE 1: BROAD</span>
+                            <h4 class="text-xs font-bold text-red-700 mt-2">General Topic</h4>
+                            <p class="text-xs text-gray-700 mt-1">"Social media and youth mental health."</p>
+                            <span class="text-[10px] text-red-500 mt-2 block font-semibold">❌ Unmeasurable / Vague</span>
+                        </div>
+                        <div class="p-4 bg-amber-50 border-t-4 border-amber-500 rounded-xl">
+                            <span class="bg-amber-500 text-white rounded-full px-2 py-0.5 text-[10px] font-bold">STAGE 2: FOCUSED</span>
+                            <h4 class="text-xs font-bold text-amber-800 mt-2">Research Question</h4>
+                            <p class="text-xs text-gray-700 mt-1">"Does nighttime screen exposure affect adolescent sleep quality?"</p>
+                            <span class="text-[10px] text-amber-700 mt-2 block font-semibold">⚠️ Better, needs units</span>
+                        </div>
+                        <div class="p-4 bg-blue-50 border-t-4 border-montano-blue rounded-xl">
+                            <span class="bg-montano-blue text-white rounded-full px-2 py-0.5 text-[10px] font-bold">STAGE 3: HYPOTHESIS</span>
+                            <h4 class="text-xs font-bold text-montano-blue mt-2">Testable Statement</h4>
+                            <p class="text-xs text-gray-700 mt-1">"Adolescents using phones >2 hours before sleep will show 30% fewer REM sleep minutes."</p>
+                            <span class="text-[10px] text-montano-blue mt-2 block font-semibold">✓ Falsifiable Prediction</span>
+                        </div>
+                        <div class="p-4 bg-green-50 border-t-4 border-green-600 rounded-xl">
+                            <span class="bg-green-600 text-white rounded-full px-2 py-0.5 text-[10px] font-bold">STAGE 4: OPERATIONAL</span>
+                            <h4 class="text-xs font-bold text-green-800 mt-2">Operational Variables</h4>
+                            <p class="text-xs text-gray-700 mt-1"><strong>IV:</strong> Phone screen time (0h vs 2h).<br><strong>DV:</strong> Minutes in REM sleep (EEG device).<br><strong>CV:</strong> Room temp, caffeine.</p>
+                            <span class="text-[10px] text-green-700 mt-2 block font-bold">✓ Fully Replicable</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Solved Examples (15 Examples) -->
+            <section id="tab2" class="tab-content hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-2xl border border-gray-200 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">15 Solved Examples: Questions, Hypotheses & Variables</h2>
+                        <p class="text-xs text-gray-600">Explore variable breakdowns across 3 complexity levels. Click the speaker icon to hear audio explanations.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="filterExamples('all')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white">All (15)</button>
+                        <button onclick="filterExamples('basic')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 1 Basic</button>
+                        <button onclick="filterExamples('intermediate')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 2 Interm.</button>
+                        <button onclick="filterExamples('advanced')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 3 Adv.</button>
+                    </div>
+                </div>
+
+                <div id="examples-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Populated dynamically via JavaScript -->
+                </div>
+            </section>
+
+            <!-- TAB 3: Interactive Voice Simulator & Variable Lab -->
+            <section id="tab3" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Voice Simulator Controls (7 cols) -->
+                    <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-montano-blue shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b pb-3 mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-montano-blue text-white flex items-center justify-center font-bold">
+                                        <i class="fa-solid fa-microscope"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-montano-blue">Dr. Montano - Variable Analysis Mentor</h3>
+                                        <span class="text-xs text-montano-teal font-semibold">Interactive Research Lab Simulator</span>
+                                    </div>
+                                </div>
+                                <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span> Live Speech Engine
+                                </span>
+                            </div>
+
+                            <!-- Mentor Dialogue Box -->
+                            <div class="bg-montano-softWhite p-4 rounded-xl border border-montano-lightBlue mb-4">
+                                <p id="mentor-speech" class="text-sm text-gray-800 font-semibold leading-relaxed">
+                                    "Welcome to the Variable Lab! Scenario: A researcher tests whether 200mg of caffeine intake improves digit-span memory scores in high school students, while keeping room temperature at 21°C. State the Independent Variable, Dependent Variable, and Controlled Variable aloud."
+                                </p>
+                                <button onclick="speakText(document.getElementById('mentor-speech').innerText)" class="mt-2 text-xs font-bold text-montano-blue hover:text-montano-teal flex items-center gap-1">
+                                    <i class="fa-solid fa-volume-high"></i> Replay Audio
+                                </button>
+                            </div>
+
+                            <!-- Voice Input Controls -->
+                            <div class="space-y-3">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Your Spoken / Written Breakdown</label>
+                                <div class="flex gap-2">
+                                    <button id="mic-btn" onclick="toggleSpeechRecognition()" class="flex-1 bg-montano-blue hover:bg-montano-teal text-white py-3 px-4 rounded-xl font-bold text-sm shadow flex items-center justify-center gap-2 transition-all">
+                                        <i class="fa-solid fa-microphone text-montano-yellow text-lg"></i>
+                                        <span id="mic-btn-text">Start Speaking Answer</span>
+                                    </button>
+                                </div>
+                                
+                                <p class="text-xs text-gray-500 italic text-center">Or type your breakdown below if mic access is unavailable:</p>
+
+                                <textarea id="user-input-text" rows="3" placeholder="Example: The IV is caffeine dosage (200mg vs 0mg), the DV is digit-span memory score, and the CV is room temperature (21°C)..." 
+                                          class="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-montano-blue focus:outline-none transition"></textarea>
+                                
+                                <button onclick="evaluateUserResponse()" class="w-full bg-montano-yellow hover:bg-amber-400 text-montano-blue font-extrabold py-3 px-4 rounded-xl text-sm shadow transition">
+                                    Analyze Variable Breakdown
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Speech Status Notification -->
+                        <div id="speech-status" class="mt-4 text-xs font-bold text-gray-500 text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-info"></i> Ready for input. Speak clearly into your microphone.
+                        </div>
+                    </div>
+
+                    <!-- Interactive Variable Breakdown Lab (5 cols) -->
+                    <div class="lg:col-span-5 bg-white p-6 rounded-2xl border-2 border-montano-teal shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-extrabold text-montano-blue border-b pb-2 mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-vial-circle-check text-montano-yellow"></i> Live Variable Dashboard
+                            </h3>
+
+                            <!-- Score Meters -->
+                            <div class="space-y-4">
+                                <!-- IV Identification -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                        <span class="text-gray-700">Independent Variable (IV) Precision</span>
+                                        <span id="score-iv-val" class="text-montano-blue">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div id="score-iv-bar" class="bg-montano-blue h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- DV Identification -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                        <span class="text-gray-700">Dependent Variable (DV) Operationalization</span>
+                                        <span id="score-dv-val" class="text-montano-teal">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div id="score-dv-bar" class="bg-montano-teal h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- CV Identification -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                        <span class="text-gray-700">Controlled Variables (CV) Rigor</span>
+                                        <span id="score-cv-val" class="text-montano-olive">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div id="score-cv-bar" class="bg-montano-olive h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Scientific Terms Detected -->
+                            <div class="mt-6">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Detected Variable Markers</label>
+                                <div id="detected-terms-container" class="flex flex-wrap gap-1.5 min-h-[40px] p-2 bg-montano-softWhite rounded-xl border border-gray-200">
+                                    <span class="text-xs text-gray-400 italic">No variables detected yet. Speak or type your answer.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Pedagogical Feedback Container -->
+                        <div class="mt-6 bg-montano-softWhite p-4 rounded-xl border border-montano-lightBlue">
+                            <h4 class="text-xs font-extrabold text-montano-blue uppercase tracking-wider mb-1 flex items-center gap-1">
+                                <i class="fa-solid fa-graduation-cap"></i> Mentor Evaluation
+                            </h4>
+                            <p id="ai-feedback-text" class="text-xs text-gray-700 leading-relaxed">
+                                Awaiting student response. Complete the prompt to receive real-time analysis of your experimental design skills.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: Question Refinement Workshop & Exit Ticket -->
+            <section id="tab4" class="tab-content hidden space-y-6">
+                <!-- 10-Min Question Improvement Workshop -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-montano-teal text-white text-xs font-bold px-3 py-1 rounded-full uppercase">10-Min Guided Activity</span>
+                        <h2 class="text-xl font-extrabold text-montano-blue">Question Refinement Workshop</h2>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-6">Transform vague, unmeasurable topics into focused, operationally defined research questions and testable hypotheses.</p>
+
+                    <div class="space-y-6">
+                        <!-- Workshop Item 1 -->
+                        <div class="p-4 bg-montano-softWhite rounded-xl border-l-4 border-montano-blue">
+                            <span class="text-xs font-bold text-red-600 uppercase">Broad Question #1</span>
+                            <h3 class="font-bold text-sm text-montano-blue mt-1">"Is social media bad for teenagers?"</h3>
+                            <p class="text-xs text-gray-600 mb-3">Improve this question into a measurable research question. Specify the platform, usage metric, and psychological outcome.</p>
+                            <textarea rows="2" class="w-full p-3 border rounded-xl text-sm focus:border-montano-blue focus:outline-none" placeholder="Example: Does spending more than 2 hours daily on Instagram correlate with higher social comparison anxiety scores in 10th graders?"></textarea>
+                        </div>
+
+                        <!-- Workshop Item 2 -->
+                        <div class="p-4 bg-montano-softWhite rounded-xl border-l-4 border-montano-teal">
+                            <span class="text-xs font-bold text-red-600 uppercase">Broad Question #2</span>
+                            <h3 class="font-bold text-sm text-montano-teal mt-1">"Does music make people study better?"</h3>
+                            <p class="text-xs text-gray-600 mb-3">Improve this question by defining the type of music, the study task, and how performance will be measured.</p>
+                            <textarea rows="2" class="w-full p-3 border rounded-xl text-sm focus:border-montano-teal focus:outline-none" placeholder="Example: Do students who listen to instrumental classical music solve 20 logic puzzles faster than students studying in silence?"></textarea>
+                        </div>
+
+                        <!-- 5-Min Exit Ticket Section -->
+                        <div class="p-5 bg-white rounded-xl border-2 border-montano-yellow shadow-md">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-montano-yellow text-montano-blue text-xs font-extrabold px-3 py-1 rounded-full uppercase">5-Min Exit Ticket</span>
+                                <h3 class="font-bold text-sm text-montano-blue">Variable Naming Challenge</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3">Read the research prompt and state the IV, DV, CV, and Operational Definition for the DV.</p>
+                            
+                            <div class="bg-montano-softWhite p-3 rounded-lg border border-gray-200 mb-3 text-xs text-gray-800">
+                                <strong>Prompt:</strong> "Dr. Gomez wants to test if 30 minutes of morning sunlight exposure reduces self-reported sadness levels in high school seniors during winter months. All participants eat the same breakfast and take the test at 8:00 AM."
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-blue mb-1">Independent Variable (IV):</label>
+                                    <input id="exit-iv" type="text" placeholder="e.g., Morning sunlight exposure (30 min vs 0 min)" class="w-full p-2 border rounded-lg text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-teal mb-1">Dependent Variable (DV):</label>
+                                    <input id="exit-dv" type="text" placeholder="e.g., Self-reported sadness level" class="w-full p-2 border rounded-lg text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-olive mb-1">Controlled Variables (CV):</label>
+                                    <input id="exit-cv" type="text" placeholder="e.g., Breakfast composition, time of day (8:00 AM)" class="w-full p-2 border rounded-lg text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-blue mb-1">Operational Definition of DV:</label>
+                                    <input id="exit-op" type="text" placeholder="e.g., Score on the 1-10 Beck Depression Inventory inventory scale" class="w-full p-2 border rounded-lg text-xs">
+                                </div>
+                            </div>
+
+                            <button onclick="saveExitTicket()" class="bg-montano-blue hover:bg-montano-teal text-white font-bold text-xs px-4 py-2 rounded-lg shadow transition">
+                                Submit Exit Ticket Variables
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: Formative Evaluation (15 Practice Problems) -->
+            <section id="tab5" class="tab-content hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-2xl border border-gray-200 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">15 Evaluative Practice Problems</h2>
+                        <p class="text-xs text-gray-600">Identify variables, operationalize constructs, and convert questions to hypotheses. Toggle step-by-step solutions.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="filterProblems('all')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white">All (15)</button>
+                        <button onclick="filterProblems('basic')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 1 Basic</button>
+                        <button onclick="filterProblems('intermediate')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 2 Interm.</button>
+                        <button onclick="filterProblems('advanced')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 3 Adv.</button>
+                    </div>
+                </div>
+
+                <!-- Formative Exercises List -->
+                <div id="problems-container" class="space-y-4">
+                    <!-- Populated dynamically via JavaScript -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-8 pt-4 border-t border-gray-300 text-center text-xs text-gray-600 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>
+                <strong>Colegio Montano</strong> &copy; 2026 - Senior Instructional Design & Interactive Educational Web
+            </div>
+            <div class="text-montano-teal font-semibold">
+                High School Department | Psychology B2 Curriculum (Guide 2)
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & INTERACTION ENGINE -->
+    <script>
+        // DATA STRUCTURES: 15 Solved Examples (Guide 2 Focus)
+        const solvedExamples = [
+            // Level 1: Basic (5)
+            { 
+                id: 1, level: 'basic', 
+                text: 'Research Study: "Testing if 8 hours of sleep improves high school students exam scores compared to 4 hours."', 
+                type: 'Variables Identification', 
+                explanation: 'IV: Hours of sleep (8h vs 4h). DV: Exam score percentage. CV: Same exam difficulty and room environment.', 
+                tags: ['IV/DV', 'Sleep Study', 'Basic'] 
+            },
+            { 
+                id: 2, level: 'basic', 
+                text: 'Question: "Does chewing gum help students concentrate during math class?"', 
+                type: 'Research Question', 
+                explanation: 'An open-ended inquiry exploring the relationship between chewing gum and focus.', 
+                tags: ['Question', 'Concentration'] 
+            },
+            { 
+                id: 3, level: 'basic', 
+                text: 'Hypothesis: "Students who chew peppermint gum will complete 20% more math problems correctly than non-gum chewers."', 
+                type: 'Testable Hypothesis', 
+                explanation: 'A specific, directional, and falsifiable statement specifying quantitative outcome.', 
+                tags: ['Hypothesis', 'Directional'] 
+            },
+            { 
+                id: 4, level: 'basic', 
+                text: 'Operational Definition: "Test Anxiety is measured by the change in heart rate (BPM) 5 minutes before an exam."', 
+                type: 'Operational Definition', 
+                explanation: 'Defines an abstract psychological state (anxiety) using a measurable physiological metric (BPM).', 
+                tags: ['Operational Metric', 'Anxiety'] 
+            },
+            { 
+                id: 5, level: 'basic', 
+                text: 'Research Study: "Measuring whether room lighting affects reading speed in 10th graders."', 
+                type: 'Variables Identification', 
+                explanation: 'IV: Lighting brightness (Lumens). DV: Reading speed (Words Per Minute). CV: Same reading passage.', 
+                tags: ['Reading Speed', 'Environment'] 
+            },
+
+            // Level 2: Intermediate (5)
+            { 
+                id: 6, level: 'intermediate', 
+                text: 'Hypothesis Conversion: Turn "Noise affects memory" into a directional, operationalized hypothesis.', 
+                type: 'Hypothesis Refinement', 
+                explanation: 'Refined Hypothesis: "Participants studying in 80dB white noise will recall 25% fewer words on a 30-word recall test than those in silence."', 
+                tags: ['Refinement', 'Noise', 'Memory'] 
+            },
+            { 
+                id: 7, level: 'intermediate', 
+                text: 'Controlled Variable Analysis: "Testing a new study app on memory retention."', 
+                type: 'Extraneous Variable Control', 
+                explanation: 'CVs required: Prior knowledge of subject, time spent using app, smartphone brand, and testing time.', 
+                tags: ['Controlled Variables', 'Validity'] 
+            },
+            { 
+                id: 8, level: 'intermediate', 
+                text: 'Operationalizing "Aggression" in a playground observation study.', 
+                type: 'Behavioral Operationalization', 
+                explanation: 'Operational Definition: "Number of physical pushes, verbal insults, or object snatching observed during 15 min of recess."', 
+                tags: ['Aggression', 'Observation'] 
+            },
+            { 
+                id: 9, level: 'intermediate', 
+                text: 'Research Study: "Investigating if reward systems increase homework completion rates in high schoolers."', 
+                type: 'Variables Identification', 
+                explanation: 'IV: Presence of financial/token reward. DV: Percentage of weekly homework assignments turned in on time.', 
+                tags: ['Motivation', 'Rewards'] 
+            },
+            { 
+                id: 10, level: 'intermediate', 
+                text: 'Distinguishing Question vs Hypothesis: "What is the relationship between screen time and empathy scores?" vs "Increased screen time decreases empathy scores."', 
+                type: 'Methodological Comparison', 
+                explanation: 'The first is an open research question; the second is a directional falsifiable hypothesis.', 
+                tags: ['Distinction', 'Empathy'] 
+            },
+
+            // Level 3: Advanced (5)
+            { 
+                id: 11, level: 'advanced', 
+                text: 'Confounding Variable Identification: A study finds morning classes score higher than afternoon classes, but morning classes have a different teacher.', 
+                type: 'Confounding Variable Analysis', 
+                explanation: 'Confounding Variable: Teacher quality/style is confounded with time of day, destroying internal validity.', 
+                tags: ['Confound', 'Internal Validity'] 
+            },
+            { 
+                id: 12, level: 'advanced', 
+                text: 'Complex Operationalization: Defining "Social Exclusion Sensitivity" in an experimental paradigm.', 
+                type: 'Construct Operationalization', 
+                explanation: 'Operational Definition: "Self-reported rejection distress score (1-7 scale) and change in galvonic skin response (GSR) during Cyberball game."', 
+                tags: ['Construct', 'Cyberball'] 
+            },
+            { 
+                id: 13, level: 'advanced', 
+                text: 'Longitudinal Variable Design: "Examining whether mindfulness training in 9th grade reduces burnout in 12th grade."', 
+                type: 'Longitudinal Design', 
+                explanation: 'IV: 8-week mindfulness course participation. DV: Maslach Burnout Inventory score in 12th grade. CV: Baseline 9th-grade stress.', 
+                tags: ['Longitudinal', 'Burnout'] 
+            },
+            { 
+                id: 14, level: 'advanced', 
+                text: 'Refining Broad Questions: Broad: "Does social media harm self-esteem?" -> Refined Design.', 
+                type: 'Multi-Variable Refinement', 
+                explanation: 'Refined: "Do female adolescents viewing idealized beauty reels on TikTok for >1 hour daily exhibit lower Rosenberg Self-Esteem scale scores?"', 
+                tags: ['Multi-Variable', 'Self-Esteem'] 
+            },
+            { 
+                id: 15, level: 'advanced', 
+                text: 'Evaluating Operational Deficiencies: "Measuring intelligence by asking students if they feel smart."', 
+                type: 'Construct Validity Critique', 
+                explanation: 'Flaw: Lacks construct validity; measures self-efficacy or subjective confidence, not cognitive intelligence.', 
+                tags: ['Construct Validity', 'Critique'] 
+            }
+        ];
+
+        // DATA STRUCTURES: 15 Formative Practice Problems
+        const formativeProblems = [
+            // Level 1: Basic (5)
+            { 
+                id: 1, level: 'basic', 
+                prompt: 'Identify the IV and DV: "A researcher tests whether drinking energy drinks increases reaction speed on a computer test."', 
+                solution: 'Independent Variable (IV): Energy drink consumption (Energy Drink vs Water/Placebo).\nDependent Variable (DV): Reaction speed measured in milliseconds.' 
+            },
+            { 
+                id: 2, level: 'basic', 
+                prompt: 'Convert to a Hypothesis: Research Question = "Does room temperature affect typing accuracy?"', 
+                solution: 'Testable Hypothesis: "Typing accuracy (percentage of error-free words per minute) will be 15% higher in a 20°C room compared to a 30°C room."' 
+            },
+            { 
+                id: 3, level: 'basic', 
+                prompt: 'Name two Controlled Variables necessary when testing if classical music helps students memorize vocabulary words.', 
+                solution: 'Controlled Variables: 1) Difficulty level of vocabulary words. 2) Volume level (decibels) of the music. 3) Time allocated for study.' 
+            },
+            { 
+                id: 4, level: 'basic', 
+                prompt: 'Classify: "Students exposed to blue light before bed will take 20 minutes longer to fall asleep."', 
+                solution: 'Classified as a TESTABLE HYPOTHESIS. It makes a clear, directional, and quantifiable prediction.' 
+            },
+            { 
+                id: 5, level: 'basic', 
+                prompt: 'Provide an operational definition for "Study Time".', 
+                solution: 'Operational Definition: "Total number of minutes spent actively reading or taking notes on course materials, recorded via a digital timer."' 
+            },
+
+            // Level 2: Intermediate (5)
+            { 
+                id: 6, level: 'intermediate', 
+                prompt: 'Improve the broad question: "Does technology make kids distracted?"', 
+                solution: 'Improved Question: "Does having smartphone notifications enabled during a 45-minute lecture increase the frequency of off-task glances in high school students?"' 
+            },
+            { 
+                id: 7, level: 'intermediate', 
+                prompt: 'Identify the flaw in this operational definition: "Happiness is defined as feeling good during the day."', 
+                solution: 'Flaw: It uses vague subjective terms ("feeling good") without objective measurement, numerical scale, or observable behavior.' 
+            },
+            { 
+                id: 8, level: 'intermediate', 
+                prompt: 'In an experiment testing caffeine on memory, group A gets coffee at 8 AM and group B gets decaf at 4 PM. What is the confounding variable?', 
+                solution: 'Confounding Variable: Time of day (8 AM vs 4 PM). Memory fluctuations throughout the day confound the effect of caffeine.' 
+            },
+            { 
+                id: 9, level: 'intermediate', 
+                prompt: 'State the IV, DV, and CV: "Comparing math scores between students taught with visual diagrams versus text-only lectures."', 
+                solution: 'IV: Teaching method (Visual diagrams vs Text-only).\nDV: Math test scores (0-100%).\nCV: Math teacher, test difficulty, topic content.' 
+            },
+            { 
+                id: 10, level: 'intermediate', 
+                prompt: 'Why is a non-falsifiable hypothesis invalid in psychological science?', 
+                solution: 'Answer: If a hypothesis cannot be proven false through empirical observation or data collection, it falls outside the scientific method.' 
+            },
+
+            // Level 3: Advanced (5)
+            { 
+                id: 11, level: 'advanced', 
+                prompt: 'Operationalize "Prosocial Behavior" for an observational high school hallway study.', 
+                solution: 'Operational Definition: "The count of helpful behaviors observed during a 20-min passing period, such as holding doors, picking up dropped items, or guiding visitors."' 
+            },
+            { 
+                id: 12, level: 'advanced', 
+                prompt: 'Critique this research design: "To test if exercise reduces stress, researchers surveyed 10 marathons runners and 10 couch potatoes on their stress levels."', 
+                solution: 'Critique: Lacks random assignment and baseline pre-testing. Subject selection bias and pre-existing lifestyle factors act as unmeasured confounds.' 
+            },
+            { 
+                id: 13, level: 'advanced', 
+                prompt: 'Create a full experimental design matrix (Question, Hypothesis, IV, DV, CV, Operational Definition) for the topic "Aromatherapy and Test Stress".', 
+                solution: 'Question: Does lavender scent reduce test stress?\nHypothesis: Lavender exposure will decrease pre-test heart rate by 10 BPM.\nIV: Lavender essential oil vs odorless air.\nDV: Heart rate in BPM.\nCV: Exam difficulty, room temperature.\nOp Def of DV: Pulse rate measured via finger oximeter 1 minute prior to test distribution.' 
+            },
+            { 
+                id: 14, level: 'advanced', 
+                prompt: 'Explain how double-blind controls prevent both Experimenter Expectancy Effects and Participant Demand Characteristics.', 
+                solution: 'Answer: Neither researcher nor participant knows group assignments, preventing researchers from giving subtle cues and participants from altering behavior to fit expectations.' 
+            },
+            { 
+                id: 15, level: 'advanced', 
+                prompt: 'Distinguish between a Categorical Independent Variable and a Continuous Independent Variable with examples.', 
+                solution: 'Categorical IV: Discrete groups (e.g., Type of therapy: CBT vs Psychodynamic).\nContinuous IV: Measured on a continuous scale (e.g., Dosage of medication in milligrams: 0mg, 10mg, 20mg, 30mg).' 
+            }
+        ];
+
+        // RENDER FUNCTIONS
+        function renderExamples(filter = 'all') {
+            const container = document.getElementById('examples-container');
+            container.innerHTML = '';
+            
+            const filtered = solvedExamples.filter(ex => filter === 'all' || ex.level === filter);
+
+            filtered.forEach(ex => {
+                const badgeColor = ex.level === 'basic' ? 'bg-blue-100 text-montano-blue border-blue-300' :
+                                   ex.level === 'intermediate' ? 'bg-teal-100 text-montano-teal border-teal-300' :
+                                   'bg-amber-100 text-amber-800 border-amber-300';
+                
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] uppercase font-black px-2.5 py-0.5 rounded-full border ${badgeColor}">
+                                ${ex.level.toUpperCase()}
+                            </span>
+                            <button onclick="speakText('${escapeQuotes(ex.text)}')" class="text-montano-blue hover:text-montano-teal transition p-1" title="Listen to audio explanation">
+                                <i class="fa-solid fa-volume-high text-lg"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs font-bold text-gray-800 mb-3 italic">"${ex.text}"</p>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-gray-200 mb-2">
+                            <span class="text-[11px] font-black text-montano-blue block">Type: ${ex.type}</span>
+                            <p class="text-[11px] text-gray-600 mt-1">${ex.explanation}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        ${ex.tags.map(tag => `<span class="text-[9px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-semibold">#${tag}</span>`).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderProblems(filter = 'all') {
+            const container = document.getElementById('problems-container');
+            container.innerHTML = '';
+
+            const filtered = formativeProblems.filter(p => filter === 'all' || p.level === filter);
+
+            filtered.forEach((p) => {
+                const badgeColor = p.level === 'basic' ? 'bg-blue-100 text-montano-blue border-blue-300' :
+                                   p.level === 'intermediate' ? 'bg-teal-100 text-montano-teal border-teal-300' :
+                                   'bg-amber-100 text-amber-800 border-amber-300';
+
+                const item = document.createElement('div');
+                item.className = "bg-white p-5 rounded-2xl border border-gray-200 shadow-sm";
+                item.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-montano-blue text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">${p.id}</span>
+                            <span class="text-xs font-black uppercase tracking-wide px-2.5 py-0.5 rounded-full border ${badgeColor}">Level: ${p.level}</span>
+                        </div>
+                        <button onclick="toggleSolution('sol-${p.id}')" class="bg-montano-softWhite hover:bg-gray-200 text-montano-blue border border-montano-lightBlue text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-eye text-montano-yellow"></i> <span id="btn-txt-sol-${p.id}">Show Solution</span>
+                        </button>
+                    </div>
+                    <p class="text-sm font-bold text-gray-800 mb-2">${p.prompt}</p>
+                    <div id="sol-${p.id}" class="hidden mt-3 p-4 bg-montano-softWhite border-l-4 border-montano-teal rounded-r-xl">
+                        <span class="text-xs font-extrabold text-montano-teal uppercase tracking-wider block mb-1"><i class="fa-solid fa-check-circle"></i> Step-by-Step Methodological Solution:</span>
+                        <p class="text-xs text-gray-700 font-medium leading-relaxed whitespace-pre-line">${p.solution}</p>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // TAB SWITCHING LOGIC
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
+        }
+
+        function filterExamples(level) {
+            document.querySelectorAll('.ex-filter-btn').forEach(btn => {
+                btn.className = "ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700";
+            });
+            event.target.className = "ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white";
+            renderExamples(level);
+        }
+
+        function filterProblems(level) {
+            document.querySelectorAll('.prob-filter-btn').forEach(btn => {
+                btn.className = "prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700";
+            });
+            event.target.className = "prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white";
+            renderProblems(level);
+        }
+
+        function toggleSolution(solId) {
+            const solDiv = document.getElementById(solId);
+            const btnTxt = document.getElementById(`btn-txt-${solId}`);
+            if (solDiv.classList.contains('hidden')) {
+                solDiv.classList.remove('hidden');
+                btnTxt.innerText = "Hide Solution";
+            } else {
+                solDiv.classList.add('hidden');
+                btnTxt.innerText = "Show Solution";
+            }
+        }
+
+        // FULLSCREEN TOGGLE API
+        function toggleFullscreen() {
+            const whiteboard = document.getElementById('whiteboard');
+            if (!document.fullscreenElement) {
+                if (whiteboard.requestFullscreen) {
+                    whiteboard.requestFullscreen();
+                } else if (whiteboard.webkitRequestFullscreen) {
+                    whiteboard.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // TEXT-TO-SPEECH (TTS) SYNTHESIS
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop active audio
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Text-to-Speech audio is not supported in this web browser.");
+            }
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        // SPEECH RECOGNITION & VOICE SIMULATOR LOGIC
+        let recognition = null;
+        let isListening = false;
+
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isListening = true;
+                document.getElementById('mic-btn-text').innerText = "Listening... Speak Now";
+                document.getElementById('mic-btn').classList.add('pulse-ring', 'bg-red-600');
+                document.getElementById('speech-status').innerHTML = '<span class="text-red-600 flex items-center gap-1"><i class="fa-solid fa-microphone animate-bounce"></i> Microphone Active - Speak your variable breakdown in English...</span>';
+            };
+
+            recognition.onresult = function(event) {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                document.getElementById('user-input-text').value = transcript;
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Speech Recognition Error:", event.error);
+                stopListeningState("Error listening. Please use text entry or try again.");
+            };
+
+            recognition.onend = function() {
+                stopListeningState("Speech input captured. Click 'Analyze Variable Breakdown' for evaluation.");
+            };
+        } else {
+            document.getElementById('speech-status').innerText = "Web Speech API not supported on this browser. You can type your response.";
+        }
+
+        function toggleSpeechRecognition() {
+            if (!recognition) {
+                alert("Web Speech Recognition API is not supported in your browser. Please type your response.");
+                return;
+            }
+
+            if (isListening) {
+                recognition.stop();
+            } else {
+                try {
+                    recognition.start();
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+        }
+
+        function stopListeningState(msg) {
+            isListening = false;
+            document.getElementById('mic-btn-text').innerText = "Start Speaking Answer";
+            document.getElementById('mic-btn').classList.remove('pulse-ring', 'bg-red-600');
+            document.getElementById('speech-status').innerHTML = `<i class="fa-solid fa-circle-info"></i> ${msg}`;
+        }
+
+        // REAL-TIME EVALUATION ENGINE FOR VARIABLE DASHBOARD
+        function evaluateUserResponse() {
+            const text = document.getElementById('user-input-text').value.trim();
+            if (!text) {
+                alert("Please provide a speech or written variable breakdown before submitting.");
+                return;
+            }
+
+            const lower = text.toLowerCase();
+
+            // Key Research Terms to scan for Guide 2
+            const ivTerms = ['independent', 'iv', 'caffeine', 'dosage', 'cause', 'manipulate'];
+            const dvTerms = ['dependent', 'dv', 'digit span', 'memory', 'score', 'effect', 'measure'];
+            const cvTerms = ['control', 'controlled', 'cv', 'temperature', 'constant', 'room', '21'];
+
+            let ivScore = 30;
+            let dvScore = 30;
+            let cvScore = 30;
+            const detected = [];
+
+            ivTerms.forEach(t => {
+                if (lower.includes(t)) { ivScore += 20; if (!detected.includes('IV Marker')) detected.push('IV Marker (' + t + ')'); }
+            });
+
+            dvTerms.forEach(t => {
+                if (lower.includes(t)) { dvScore += 20; if (!detected.includes('DV Marker')) detected.push('DV Marker (' + t + ')'); }
+            });
+
+            cvTerms.forEach(t => {
+                if (lower.includes(t)) { cvScore += 20; if (!detected.includes('CV Marker')) detected.push('CV Marker (' + t + ')'); }
+            });
+
+            ivScore = Math.min(100, ivScore);
+            dvScore = Math.min(100, dvScore);
+            cvScore = Math.min(100, cvScore);
+
+            // Update Dashboard UI Scores
+            updateDashboardMeters(ivScore, dvScore, cvScore);
+
+            // Update Detected Key Terms Container
+            const termsContainer = document.getElementById('detected-terms-container');
+            if (detected.length > 0) {
+                termsContainer.innerHTML = detected.map(t => `<span class="bg-montano-blue text-white text-xs font-bold px-2 py-1 rounded-lg">✓ ${t}</span>`).join('');
+            } else {
+                termsContainer.innerHTML = `<span class="text-xs text-amber-700 italic">No explicit variable markers detected. Mention 'IV' (caffeine), 'DV' (memory score), and 'CV' (room temperature).</span>`;
+            }
+
+            // Generate AI Pedagogical Feedback
+            let feedback = "";
+            const avg = (ivScore + dvScore + cvScore) / 3;
+            if (avg >= 75) {
+                feedback = `Outstanding analysis! You accurately identified the Independent Variable (caffeine dosage), Dependent Variable (digit-span score), and Controlled Variable (room temperature).`;
+            } else if (avg >= 50) {
+                feedback = `Good job! You identified part of the design, but ensure you explicitly state all three variables (IV, DV, CV) and their operational units.`;
+            } else {
+                feedback = `You provided an initial attempt. Remember: IV is what the experimenter changes (caffeine), DV is what is measured (digit-span score), and CVs are kept constant (21°C temperature).`;
+            }
+
+            document.getElementById('ai-feedback-text').innerText = feedback;
+
+            // Trigger mentor voice response using Speech Synthesis
+            speakText(`Thank you. ${feedback}`);
+        }
+
+        function updateDashboardMeters(iv, dv, cv) {
+            document.getElementById('score-iv-val').innerText = `${iv}%`;
+            document.getElementById('score-iv-bar').style.width = `${iv}%`;
+
+            document.getElementById('score-dv-val').innerText = `${dv}%`;
+            document.getElementById('score-dv-bar').style.width = `${dv}%`;
+
+            document.getElementById('score-cv-val').innerText = `${cv}%`;
+            document.getElementById('score-cv-bar').style.width = `${cv}%`;
+        }
+
+        function saveExitTicket() {
+            const iv = document.getElementById('exit-iv').value.trim();
+            const dv = document.getElementById('exit-dv').value.trim();
+            const cv = document.getElementById('exit-cv').value.trim();
+            const op = document.getElementById('exit-op').value.trim();
+
+            if (!iv || !dv || !cv || !op) {
+                alert("Please fill in all four variable fields before submitting your exit ticket.");
+            } else {
+                alert("Exit Ticket submitted successfully! Great job identifying the IV, DV, CV, and Operational Definition.");
+            }
+        }
+
+        // INITIALIZATION ON PAGE LOAD
+        window.onload = function() {
+            renderExamples('all');
+            renderProblems('all');
+        };
+    </script>
+</body>
+</html>
